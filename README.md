@@ -6,7 +6,7 @@ GEngine is a simple web game engine that provides powerful tools for you.
 ## Basic guide
 
 This is basic beginner guide.
-He will teach you how to create a scene,
+It will teach you how to create a scene,
 add objects to it and add behaviors to them.
 
 ### Html

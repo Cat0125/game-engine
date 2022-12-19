@@ -4,7 +4,7 @@ class StaticMesh extends Actor {
 		this.x = x;
 		this.y = y;
 		this.model = model;
-		this.rotation = rotation;
+		this.angle = rotation;
 		this.color = color;
 		this.behaviors = [];
 	}

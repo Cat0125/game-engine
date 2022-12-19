@@ -3,17 +3,18 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>GEngine demo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>game-engine demo</title>
 </head>
 
 <body>
-	<canvas id="canvas" width="400" height="400" style="border:1px solid black"></canvas>
+	<canvas id="canvas" width="200" height="200"></canvas>
 	
 	<script src="/engine/engine.js"></script>
 	<script src="/engine/functions.js"></script>
 	<script src="/objects/actor.js"></script>
 	<script src="/objects/mesh.js"></script>
+	<script src="/lib/matter.js"></script>
 	<script src="/behaviors/physics.js"></script>
 	<script src="main.js"></script>
 	
@@ -23,6 +24,12 @@
 			place-items: center;
 			height: 100vh;
 			margin: 0;
+			background: #000;
+		}
+		canvas {
+			width: 300px;
+			height: 300px;
+			background: #fff;
 		}
 	</style>
 </body>

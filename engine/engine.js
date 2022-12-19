@@ -15,7 +15,7 @@ class Scene {
 		objects.forEach((obj, i) => {
 			obj._tick(this);
 			obj.render(this.ctx);
-		})
+		});
 		this.tick();
 		this.ctx.fillStyle = '#000';
 		this.ctx.fillText(fps + ' fps', 10, 10);
@@ -26,18 +26,21 @@ class Scene {
 
 	create(object) {
 		this.objects.push(object);
+		if (typeof object.oncreate !== 'undefined') object.oncreate(this);
 	}
 
 	start() {
+		if (typeof this.onstart !== 'undefined') this.onstart();
 		requestAnimationFrame(() => this._tick.call(this));
 		this.enabled = true;
 	}
-	
+
 	stop() {
+		if (typeof this.onstop !== 'undefined') this.onstop();
 		this.enabled = false;
 	}
 
-	tick() { /* empty */ }
+	tick() {}
 }
 
 class SceneObject {
@@ -61,16 +64,12 @@ class SceneObject {
 		this.y += this.velocity.y;
 		this.tick();
 	}
-	
-	render () { /* empty */ }
 
-	tick() { /* empty */ }
+	render() { /* empty */ }
+	tick() {}
 }
 
-class Behavior {
-	constructor() { /* empty */ }
-	tick() { /* empty */ }
-}
+class Behavior { /* empty */ }
 
 function pointInPoly(polyCords, pointX, pointY) {
 	var i, j, c = 0;

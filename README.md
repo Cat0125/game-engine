@@ -1,5 +1,5 @@
-# GEngine
-GEngine is a simple web game engine that provides powerful tools for you.
+# About engine
+This engine is a simple web engine that provides powerful tools for you.
 
 # Using
 

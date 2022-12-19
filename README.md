@@ -42,12 +42,12 @@ let cube = new Mesh({
   y: 150,
   // model
   // this is basic cube model, we just use it
-  mesh: [
+  model: new Model([
     [-10, -10],
     [-10, 10],
     [10, 10],
     [10, -10]
-  ],
+  ]).get(),
   // cube color
   color: 'rgb(0,0,0)'
 });

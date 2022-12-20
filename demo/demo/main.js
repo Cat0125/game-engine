@@ -1,49 +1,54 @@
 let scene = new Scene('canvas');
+let width = 400,
+	height = 400,
+	pixelRatio = 2;
 
 function resize() {
-	let m = Math.min(window.innerWidth / canvas.width, window.innerHeight / canvas.height),
-		pixelRatio = 3.6;
+	let m = Math.min(
+		window.innerWidth / width,
+		window.innerHeight / height
+	);
 	
-	canvas.width = canvas.width * pixelRatio;
-	canvas.height = canvas.height * pixelRatio;
-	canvas.style.width = canvas.width / pixelRatio * m + 'px';
-	canvas.style.height = canvas.height / pixelRatio * m + 'px';
+	canvas.width = width * pixelRatio;
+	canvas.height = height * pixelRatio;
+	canvas.style.width = width * m + 'px';
+	canvas.style.height = height * m + 'px';
 }
 resize();
 window.onresize = resize;
 
 let cube = new Actor({
-	x: 200,
-	y: 150,
+	x: 400,
+	y: 120,
 	model: new Model([
-		[-10, -10],
-		[-10, 10],
-		[10, 10],
-		[10, -10]
+		[-20, -20],
+		[-20, 20],
+		[20, 20],
+		[20, -20]
 	]).get(),
 	color: '#ff8800'
 });
 
 let cube2 = new Actor({
-	x: 210,
+	x: 420,
 	y: 190,
 	model: new Model([
-		[-10, -10],
-		[-10, 10],
-		[10, 10],
-		[10, -10]
+		[-20, -20],
+		[-20, 20],
+		[20, 20],
+		[20, -20]
 	]).get(),
 	color: '#00ff55'
 });
 
 let ground = new StaticMesh({
-	x: 200,
-	y: 390,
+	x: 400,
+	y: 780,
 	model: new Model([
-		[-200, 10],
-		[200, 10],
-		[200, -10],
-		[-200, -10]
+		[-400, 20],
+		[400, 20],
+		[400, -20],
+		[-400, -20]
 	]).get(),
 	color: '#300'
 });
@@ -58,3 +63,5 @@ scene.create(cube);
 scene.create(cube2)
 scene.create(ground);
 scene.start();
+
+setInterval(() => document.getElementById('info').innerHTML = fps + ' FPS', 1000)

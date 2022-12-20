@@ -17,12 +17,7 @@ class Scene {
 			obj.render(this.ctx);
 		});
 		this.tick();
-		this.ctx.fillStyle = '#000';
-		this.ctx.setTransform(1,0,0,1,0,0);
-		this.ctx.rotate(0);
-		this.ctx.fillText(fps + ' FPS', 10, 10);
 		_fpsCounter++;
-		if (!this.enabled) return;
 		requestAnimationFrame(() => this._tick());
 	}
 

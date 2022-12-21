@@ -24,7 +24,10 @@ class Scene {
 	create(object) {
 		this.objects.push(object);
 		if (typeof object.oncreate !== 'undefined') object.oncreate(this);
-		object.behaviors.forEach(beh => { if (typeof beh.create != 'undefined') beh.create(object) });
+		object.behaviors.forEach(beh => {
+			if (typeof beh.create != 'undefined')
+				beh.create(object);
+		});
 	}
 
 	start() {

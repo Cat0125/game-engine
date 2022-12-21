@@ -63,44 +63,4 @@ scene.start();
 
 # Documentation
 
-## Scene
-
-### Start and stop
-
-To run scene, you needed to call `start` method.
-Tho stop it from running, call `stop`.
-```JavaScript
-scene.start();
-scene.stop();
-```
-
-### Objects
-
-```
-// Create
-scene.add(<object>);
-// Delete
-scene.objects.splice(<object index>);
-```
-Unfortunately, there is no normal way to delete objects.
-But we can delete them directly.
-
-### Ticks
-
-`scene.tick` is a function that is executed every tick.
-
-```JavaScript
-scene.tick = function() {
-	scene.objects.forEach(obj => obj.y += 1);
-}
-```
-
-### Others
-
-```JavaScript
-scene.objects
-
-scene._tick()
-
-scene.enabled
-```
+Can be found in wiki.

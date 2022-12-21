@@ -6,27 +6,36 @@ class Scene {
 		this.canvasID = canvasID;
 		this.canvas = document.getElementById(canvasID);
 		this.ctx = this.canvas.getContext('2d');
-		this.objects = [];
+		this.objects = new Set();
 	}
 
 	_tick() {
 		let objects = this.objects;
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		objects.forEach((obj, i) => {
+		for (let obj of objects) {
 			obj._tick(this);
 			obj.render(this.ctx);
-		});
+		}
 		this.tick();
 		_fpsCounter++;
 		this.reqHandle = requestAnimationFrame(() => this._tick());
 	}
 
 	create(object) {
-		this.objects.push(object);
+		this.objects.add(object);
 		if (typeof object.oncreate !== 'undefined') object.oncreate(this);
 		object.behaviors.forEach(beh => {
 			if (typeof beh.create != 'undefined')
 				beh.create(object);
+		});
+	}
+	
+	destroy(object) {
+		this.objects.delete(object);
+		if (typeof object.ondestroy !== 'undefined') object.ondestroy(this);
+		object.behaviors.forEach(beh => {
+			if (typeof beh.destroy != 'undefined')
+				beh.destroy(object);
 		});
 	}
 

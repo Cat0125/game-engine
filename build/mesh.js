@@ -1,0 +1,1 @@
+class StaticMesh extends Actor{constructor({x:t=0,y:o=0,model:i=[],rotation:s=0,color:c="black"}){super({x:t,y:o,model:i,rotation:s,color:c}),this.x=t,this.y=o,this.model=i,this.angle=s,this.color=c,this.behaviors=[]}_tick(t){this.behaviors.forEach(o=>{o.tick(this,t)}),this.tick()}}

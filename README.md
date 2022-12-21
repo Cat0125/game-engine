@@ -63,4 +63,4 @@ scene.start();
 
 # Documentation
 
-Can be found in wiki.
+Can be found in [wikis](wiki).

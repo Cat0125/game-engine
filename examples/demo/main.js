@@ -8,7 +8,7 @@ function resize() {
 		window.innerWidth / width,
 		window.innerHeight / height
 	);
-	
+
 	canvas.width = width * pixelRatio;
 	canvas.height = height * pixelRatio;
 	canvas.style.width = width * m + 'px';

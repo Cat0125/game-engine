@@ -18,7 +18,7 @@ class Scene {
 		});
 		this.tick();
 		_fpsCounter++;
-		requestAnimationFrame(() => this._tick());
+		this.reqHandle = requestAnimationFrame(() => this._tick());
 	}
 
 	create(object) {
@@ -32,13 +32,12 @@ class Scene {
 
 	start() {
 		if (typeof this.onstart !== 'undefined') this.onstart();
-		requestAnimationFrame(() => this._tick.call(this));
-		this.enabled = true;
+		this.reqHandle = requestAnimationFrame(() => this._tick.call(this));
 	}
 
 	stop() {
 		if (typeof this.onstop !== 'undefined') this.onstop();
-		this.enabled = false;
+		cancelAnimationFrame(this.reqHandle);
 	}
 
 	tick() {}

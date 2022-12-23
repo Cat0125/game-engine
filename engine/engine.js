@@ -1,6 +1,12 @@
 let fps = 0,
 	_fpsCounter = 0;
 
+/**
+ * It's a class that contains a set of objects and renders them
+ * @class
+ * @param {string} canvasID id of the canvas to render the scene
+ * @property {array} objects a set of objects
+ * */
 class Scene {
 	constructor(canvasID) {
 		this.canvasID = canvasID;
@@ -21,7 +27,7 @@ class Scene {
 		this.reqHandle = requestAnimationFrame(() => this._tick());
 	}
 
-	create(object) {
+	add(object) {
 		this.objects.add(object);
 		if (typeof object.oncreate !== 'undefined') object.oncreate(this);
 		object.behaviors.forEach(beh => {
@@ -29,7 +35,7 @@ class Scene {
 				beh.create(object);
 		});
 	}
-	
+
 	destroy(object) {
 		this.objects.delete(object);
 		if (typeof object.ondestroy !== 'undefined') object.ondestroy(this);
@@ -37,6 +43,11 @@ class Scene {
 			if (typeof beh.destroy != 'undefined')
 				beh.destroy(object);
 		});
+	}
+
+	clear() {
+		for (let obj of this.objects) obj.destroy();
+		this.objects = new Set();
 	}
 
 	start() {
@@ -49,14 +60,22 @@ class Scene {
 		cancelAnimationFrame(this.reqHandle);
 	}
 
-	tick() {}
+	tick() { /* empty */ }
 }
 
+/**
+ * It's a class that represents an object in a scene
+ * @class
+ * @param {number} x the x coordinate of the object
+ * @param {number} y the y coordinate of the object
+ * @param {number} angle the angle of the object
+ * @param {string} color the color of the object
+ */
 class SceneObject {
-	constructor({ x = 0, y = 0, rotation = 0, color = 'black' }) {
+	constructor({ x = 0, y = 0, angle = 0, color = 'black' }) {
 		this.x = x;
 		this.y = y;
-		this.rotation = rotation;
+		this.angle = angle;
 		this.color = color;
 		this.behaviors = [];
 		this.velocity = {
@@ -66,20 +85,30 @@ class SceneObject {
 	}
 
 	_tick(scene) {
-		this.behaviors.forEach(beh => {
+		for (let beh of this.behaviors) {
 			beh.tick(this, scene);
-		});
+		}
 		this.x += this.velocity.x;
 		this.y += this.velocity.y;
 		this.tick();
 	}
 
+	destroy() {
+		if (typeof this.ondestroy !== 'undefined') this.ondestroy();
+		this.behaviors.forEach(beh => {
+			if (typeof beh.destroy!== 'undefined') beh.destroy(this);
+		});
+	}
+
 	render() { /* empty */ }
-	tick() {}
+	tick() { /* empty */ }
 }
 
 class Behavior { /* empty */ }
 
+/**
+ * A class that represents a model for rendering objects in a scene
+ */
 class Model {
 	constructor(model = null) {
 		if (model) this.load(model);

@@ -13,7 +13,7 @@ let Physics;
 			this.params = params;
 		}
 		create(object) {
-			if (object instanceof StaticMesh) this.params.isStatic = true;
+			if (typeof staticMesh !== 'undefined') if (object instanceof StaticMesh) this.params.isStatic = true;
 			this.body = Bodies.fromVertices(
 				object.x,
 				object.y,
@@ -26,6 +26,9 @@ let Physics;
 			object.x = this.body.position.x;
 			object.angle = rad2deg(this.body.angle);
 			object.angleRad = this.body.angle;
+		}
+		destroy() {
+			Composite.remove(this.body);
 		}
 	}
 

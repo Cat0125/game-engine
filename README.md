@@ -1,6 +1,10 @@
 # About engine
 This engine is a simple web engine that provides powerful tools for you.
 
+## Performance
+![image](https://user-images.githubusercontent.com/106539381/209358987-5b6e86cb-321c-460d-9f4f-f47f7a238539.png)
+Screenshot from [examples/demo](examples/demo)
+
 # Using
 
 ## Basic guide
@@ -42,14 +46,14 @@ let cube = new Mesh({
   y: 150,
   // model
   // this is basic cube model, we just use it
-  mesh: [
+  model: new Model([
     [-10, -10],
     [-10, 10],
     [10, 10],
     [10, -10]
-  ],
+  ]).get(),
   // cube color
-  color: 'rgb(0,0,0)'
+  color: '#000'
 });
 
 // Add cube to scene
